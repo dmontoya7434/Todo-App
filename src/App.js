@@ -8,16 +8,24 @@ class App extends Component {
     //All the state of the application will go in here
     //Data of application goes here
     this.state = {
-      message: 'Hello World!!'
-    }
+      message: 'React Application'
+    };
+  }
+  //Defined method
+  formSubmitted(event) {
+
+    event.preventDefault(); //Prevents default action
+    console.log('form submitted');
+
   }
   render() {
   return (
     <div className="App">
       <h3> {this.state.message}</h3>
-      <form>
+      <form onSubmit={this.formSubmitted}>
         <label htmlFor="newTodo">New Todo</label>
         <input id="newTodo" name="newTodo" />
+        <button type="submit">Add Todo</button>
       </form>
     </div>
   );
