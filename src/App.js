@@ -9,14 +9,22 @@ class App extends Component {
     //Data of application goes here
     this.state = {
       message: 'React Application',
-      newTodo: ''
+      newTodo: '',
+      todos: []
     };
   }
   //Defined method
   formSubmitted(event) {
 
     event.preventDefault(); //Prevents default action
-    console.log(this.state.newTodo);
+    console.log(this.state.newTodo); //shows the lastest value from state
+    this.setState({
+      newTodo: '',
+      todos: [...this.state.todos, {
+        title: this.state.newTodo,
+        done: false
+      }]
+    })
 
   }
 
@@ -35,9 +43,16 @@ class App extends Component {
       <h3> {this.state.message}</h3>
       <form onSubmit={(event) => this.formSubmitted(event)}>
         <label htmlFor="newTodo">New Todo</label>
-        <input onChange={(event) => this.newTodoChanged(event)} id="newTodo" name="newTodo" />
+        <input onChange={(event) => this.newTodoChanged(event)} id="newTodo" name="newTodo"  value={this.state.newTodo}/>
         <button type="submit">Add Todo</button>
       </form>
+      <ul>
+      {this.state.todos.map(todo => {
+        return (<li key={todo.title}>
+          <input type="checkbox" /> {todo.title}
+          </li>)
+      })}
+      </ul>
     </div>
   );
 }
